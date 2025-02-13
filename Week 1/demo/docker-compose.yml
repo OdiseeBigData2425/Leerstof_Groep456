@@ -1,0 +1,25 @@
+# welke containers moeten er gestart worden
+services:
+  # container 1 met naam web
+  web:
+    # bouw de container vanaf de folder file
+    build: file
+    # met ports kan je eigenlijk een NAT-tabel port 5000 op de host wordt gekoppeld aan 5500 in de container
+    ports:
+      - "5000:5500"
+    # definieer de url om met de database te connecteren
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@db:5432/mydatabase
+    # dit zorgt ervoor dat eerst de db container gestart wordt en pas daarna de web container
+    depends_on:
+      - db
+
+  # tweede container met naam db
+  db:
+    # start van een image uit de registry
+    image: postgres:13
+    #environment variabelen om de database op te zetten
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DATABASE=mydatabase
