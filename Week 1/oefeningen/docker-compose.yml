@@ -1,0 +1,10 @@
+services:
+  oefening1: #bepaalt de naam van de image
+    build: oefening1
+    container_name: hello_world # bepaalt de naam van de container (indien niet gegeven = naam image)
+  oefening2:
+    build: oefening2
+    container_name: requests
+  oefeing3:
+    build: oefening3
+    container_name: filereader
