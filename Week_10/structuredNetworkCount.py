@@ -3,7 +3,7 @@ from pyspark.sql.functions import explode, split, col
 
 spark = SparkSession.builder.master('local').appName('les').getOrCreate()
 
-lines = spark.readStream.format('socket').option('host', 'localhost').option('port', 19999).load()
+lines = spark.readStream.format('socket').option('host', 'localhost').option('port', 20000).load()
 
 # splits in woorden
 words = lines.select(explode(split(lines.value, ' ')).alias('word'))
